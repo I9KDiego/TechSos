@@ -1,0 +1,3 @@
+O site da TechSOS tem como objetivo centralizar e facilitar os pedidos de suporte técnico dos clientes da empresa. Por meio da plataforma, cada empresa pode realizar seu cadastro, acessar sua conta e abrir chamados informando o problema que está enfrentando.
+O sistema permite selecionar a categoria do problema, descrever a situação, indicar o nível de urgência e fornecer um telefone para contato. Dessa forma, a equipe técnica pode entender melhor a solicitação e entrar em contato para prestar o atendimento.
+Além disso, a plataforma possui uma área de “Meus chamados”, na qual os clientes podem consultar os pedidos registrados e cancelar chamados quando necessário.
