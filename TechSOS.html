@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TechSOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,700;1,9..144,900&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--wine:#8f0a3b;--wine2:#4d0520;--amber:#ffc24b;
+--page:#f5ecee;--card:#fff;--ink:#2a1218;--mut:#7a6068;--line:#e6d5da;--field:#fbf6f7;--err:#b3173f;--ok:#12794a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--page:#220710;--card:#34101c;--ink:#fbeef1;--mut:#c4a2ad;--line:#5a2433;--field:#2a0c16;--err:#ff8da6;--ok:#6be0a4}}
+:root[data-theme="dark"]{--page:#220710;--card:#34101c;--ink:#fbeef1;--mut:#c4a2ad;--line:#5a2433;--field:#2a0c16;--err:#ff8da6;--ok:#6be0a4}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--page);color:var(--ink);font:400 16px/1.5 Manrope,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;justify-content:center;align-items:center;padding:16px}
+.app{width:100%;max-width:960px;min-height:600px;display:grid;grid-template-columns:5fr 6fr;border-radius:28px;overflow:hidden;box-shadow:0 30px 70px -20px rgba(77,5,32,.45)}
+.brand{background:radial-gradient(circle at 15% 10%,#b8124d 0,var(--wine) 40%,var(--wine2) 100%);color:#fff;padding:44px 36px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.brand::after{content:"";position:absolute;right:-90px;bottom:-90px;width:300px;height:300px;border-radius:50%;border:40px solid rgba(255,194,75,.12)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo svg{width:52px;height:52px;flex:none}
+.logo b{font:italic 900 2.3rem/1 Fraunces,Georgia,serif;letter-spacing:-.5px}
+.brand p{font:italic 700 1.7rem/1.2 Fraunces,Georgia,serif;margin:36px 0 0;max-width:15ch}
+.brand ul{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:12px;font-size:.95rem;position:relative;z-index:1}
+.brand li{display:flex;gap:10px;align-items:center}
+.brand li i{width:8px;height:8px;border-radius:50%;background:var(--amber);flex:none;box-shadow:0 0 0 4px rgba(255,194,75,.2)}
+.panel{background:var(--card);padding:44px 40px;display:flex;flex-direction:column;justify-content:center}
+h2{font:italic 900 1.9rem/1.1 Fraunces,Georgia,serif;margin:0 0 4px;color:var(--wine)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h2{color:var(--amber)}}
+:root[data-theme="dark"] h2{color:var(--amber)}
+.sub{color:var(--mut);margin:0 0 22px;font-size:.95rem}
+.field{display:block;margin-bottom:14px}
+.field>span{display:block;font-weight:800;font-size:.82rem;margin-bottom:6px}
+input,textarea{width:100%;background:var(--field);color:var(--ink);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font:inherit;transition:border-color .15s,box-shadow .15s}
+textarea{min-height:120px;resize:vertical}
+input:focus,textarea:focus{outline:none;border-color:var(--wine);box-shadow:0 0 0 4px rgba(143,10,59,.18)}
+input.bad,textarea.bad{border-color:var(--err)}
+.pw{position:relative}.pw input{padding-right:78px}
+.pw button{position:absolute;right:6px;top:6px;bottom:6px;background:none;border:0;color:var(--wine);font-weight:800;font-size:.8rem;cursor:pointer;border-radius:8px;padding:0 10px}
+button{font:inherit;cursor:pointer}
+.btn{border:0;border-radius:12px;padding:14px 20px;font-weight:800;min-height:48px;transition:transform .1s,filter .15s}
+.btn:active{transform:scale(.97)}
+.primary{background:linear-gradient(135deg,#b8124d,var(--wine));color:#fff;box-shadow:0 8px 20px -8px rgba(143,10,59,.7)}
+.primary:hover{filter:brightness(1.1)}
+.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.ghost:hover{background:var(--field)}
+.actions{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;margin-top:6px}
+.link{background:none;border:0;color:var(--wine);font-weight:800;padding:12px;width:100%;margin-top:8px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .link,:root:not([data-theme="light"]) .pw button{color:var(--amber)}}
+:root[data-theme="dark"] .link,:root[data-theme="dark"] .pw button{color:var(--amber)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.msg{min-height:1.4em;font-size:.88rem;margin-top:10px;font-weight:600}
+.msg.err{color:var(--err)}.msg.ok{color:var(--ok)}
+.hidden{display:none!important}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:10px}
+.who{font-weight:800;font-size:.9rem;display:flex;align-items:center;gap:8px;min-width:0}
+.who i{width:34px;height:34px;border-radius:50%;background:var(--wine);color:#fff;display:grid;place-items:center;font-style:normal;flex:none}
+.who span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.out{background:none;border:1.5px solid var(--line);color:var(--mut);border-radius:10px;padding:6px 12px;font-weight:700;font-size:.8rem}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--field);border-radius:12px;padding:4px;margin-bottom:20px;border:1px solid var(--line)}
+.tabs button{border:0;background:none;color:var(--mut);padding:10px;border-radius:9px;font-weight:800;font-size:.88rem}
+.tabs button[aria-selected=true]{background:var(--wine);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:999px;padding:8px 14px;font-size:.85rem;font-weight:700}
+.chips button[aria-pressed=true]{background:var(--wine);border-color:var(--wine);color:#fff}
+.chips.urg button[aria-pressed=true][data-v="Urgente"]{background:#d6203f;border-color:#d6203f}
+.count{text-align:right;font-size:.75rem;color:var(--mut);margin-top:3px}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:10px;max-height:420px;overflow-y:auto}
+.tk{border:1.5px solid var(--line);border-left:5px solid var(--wine);border-radius:14px;padding:12px 14px;background:var(--field)}
+.tk.Urgente{border-left-color:#d6203f}.tk.Alta{border-left-color:var(--amber)}
+.tk h3{margin:0 0 4px;font-size:.78rem;display:flex;justify-content:space-between;gap:8px;color:var(--mut);font-weight:800}
+.tk p{margin:0 0 6px;overflow-wrap:anywhere}
+.tk small{color:var(--mut);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.tk .x{background:none;border:0;color:var(--err);font-weight:800;font-size:.78rem;padding:4px 0}
+.empty{text-align:center;color:var(--mut);padding:28px 10px;border:1.5px dashed var(--line);border-radius:14px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:#12794a;color:#fff;padding:12px 20px;border-radius:12px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;max-width:90vw;text-align:center;z-index:9}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (max-width:760px){
+ body{padding:0;align-items:stretch}
+ .app{grid-template-columns:1fr;border-radius:0;min-height:100vh;box-shadow:none}
+ .brand{padding:26px 24px 30px}
+ .brand p,.brand ul{display:none}
+ .logo svg{width:42px;height:42px}.logo b{font-size:1.9rem}
+ .panel{padding:26px 22px 36px;border-radius:26px 26px 0 0;margin-top:-18px;position:relative;justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="brand">
+    <div class="logo">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="none" stroke="#ffc24b" stroke-width="7" stroke-dasharray="22 11"/><circle cx="32" cy="32" r="17" fill="#fff"/><path d="M32 22v11" stroke="#8f0a3b" stroke-width="5" stroke-linecap="round"/><circle cx="32" cy="41" r="3" fill="#8f0a3b"/></svg>
+      <b>TechSOS</b>
+    </div>
+    <div>
+      <p>TI terceirizada não fica sem socorro.</p>
+      <ul><li><i></i>Peça ajuda em menos de um minuto</li><li><i></i>Informe a urgência e o técnico retorna por telefone</li><li><i></i>Acompanhe todos os seus chamados</li></ul>
+    </div>
+  </aside>
+
+  <main class="panel">
+    <section id="login">
+      <h2>Entrar</h2><p class="sub">Acesse com os dados da sua empresa.</p>
+      <label class="field"><span>Empresa</span><input id="l-emp" autocomplete="organization" placeholder="Nome da empresa"></label>
+      <label class="field"><span>CNPJ</span><input id="l-cnpj" inputmode="numeric" autocomplete="off" placeholder="00.000.000/0000-00"></label>
+      <label class="field"><span>Senha</span><div class="pw"><input id="l-sen" type="password" autocomplete="current-password" placeholder="Sua senha"><button type="button" data-eye="l-sen">Mostrar</button></div></label>
+      <div class="actions"><button class="btn ghost" id="c-login">Cancelar</button><button class="btn primary" id="b-login">Pronto</button></div>
+      <button class="link" data-go="register">Não tenho cadastro</button>
+      <div class="msg" id="m-login" role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="register" class="hidden">
+      <h2>Cadastrar empresa</h2><p class="sub">Leva menos de um minuto.</p>
+      <label class="field"><span>Empresa</span><input id="r-emp" autocomplete="organization" placeholder="Nome da empresa"></label>
+      <label class="field"><span>CNPJ</span><input id="r-cnpj" inputmode="numeric" autocomplete="off" placeholder="00.000.000/0000-00"></label>
+      <label class="field"><span>Senha</span><div class="pw"><input id="r-sen" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres"><button type="button" data-eye="r-sen">Mostrar</button></div></label>
+      <div class="actions"><button class="btn ghost" data-go="login">Cancelar</button><button class="btn primary" id="b-reg">Cadastrar</button></div>
+      <div class="msg" id="m-reg" role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="help" class="hidden">
+      <div class="top"><div class="who"><i id="ini"></i><span id="who"></span></div><button class="out" id="b-out">Sair</button></div>
+      <div class="tabs" role="tablist"><button role="tab" id="t-new" aria-selected="true">AjudaAqui</button><button role="tab" id="t-list" aria-selected="false">Meus chamados <span id="n"></span></button></div>
+
+      <div id="p-new">
+        <div class="field"><span style="font-weight:800;font-size:.82rem;display:block;margin-bottom:6px">Tipo de problema</span>
+          <div class="chips" id="cats"></div></div>
+        <label class="field"><span>Qual o problema?</span><textarea id="h-prob" maxlength="500" placeholder="Conte o que está acontecendo, desde quando e o que já tentou."></textarea><div class="count"><span id="cnt">0</span>/500</div></label>
+        <div class="field"><span style="font-weight:800;font-size:.82rem;display:block;margin-bottom:6px">Urgência</span>
+          <div class="chips urg" id="urg"></div></div>
+        <label class="field"><span>Informe seu telefone</span><input id="h-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="(49) 99999-9999"></label>
+        <div class="actions"><button class="btn ghost" id="b-hclear">Cancelar</button><button class="btn primary" id="b-send">Pronto, pedir ajuda</button></div>
+        <div class="msg" id="m-help" role="status" aria-live="polite"></div>
+      </div>
+
+      <ul class="list hidden" id="list"></ul>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const CATS=['Rede e internet','Servidor','Computador','Impressora','Software','Segurança','Outro'],URG=['Baixa','Média','Alta','Urgente'];
+let session=null,cat=CATS[0],urg='Média';
+const only=s=>s.replace(/\D/g,'');
+const maskCnpj=s=>only(s).slice(0,14).replace(/^(\d{2})(\d)/,'$1.$2').replace(/^(\d{2})\.(\d{3})(\d)/,'$1.$2.$3').replace(/\.(\d{3})(\d)/,'.$1/$2').replace(/(\d{4})(\d)/,'$1-$2');
+const maskTel=s=>only(s).slice(0,11).replace(/^(\d{2})(\d)/,'($1) $2').replace(/(\d{4,5})(\d{4})$/,'$1-$2');
+function validCnpj(c){c=only(c);return c.length===14&&!/^(\d)\1+$/.test(c)} // só confere 14 dígitos (modo teste)
+async function hash(t){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return btoa(unescape(encodeURIComponent(t)))}}
+function show(id){['login','register','help'].forEach(s=>$(s).classList.toggle('hidden',s!==id));document.querySelectorAll('.msg').forEach(m=>{m.textContent='';m.className='msg'});document.querySelectorAll('.bad').forEach(e=>e.classList.remove('bad'))}
+function say(id,t,ok,field){const m=$(id);m.textContent=t;m.className='msg '+(ok?'ok':'err');document.querySelectorAll('.bad').forEach(e=>e.classList.remove('bad'));if(field){$(field).classList.add('bad');$(field).focus()}}
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),3500)}
+
+function chips(box,items,get,set){const el=$(box);el.innerHTML='';items.forEach(v=>{const b=document.createElement('button');b.type='button';b.textContent=v;b.dataset.v=v;b.setAttribute('aria-pressed',get()===v);b.onclick=()=>{set(v);[...el.children].forEach(c=>c.setAttribute('aria-pressed',c.dataset.v===v))};el.appendChild(b)})}
+chips('cats',CATS,()=>cat,v=>cat=v);chips('urg',URG,()=>urg,v=>urg=v);
+
+['l-cnpj','r-cnpj'].forEach(i=>$(i).addEventListener('input',e=>e.target.value=maskCnpj(e.target.value)));
+$('h-tel').addEventListener('input',e=>e.target.value=maskTel(e.target.value));
+$('h-prob').addEventListener('input',e=>$('cnt').textContent=e.target.value.length);
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go));
+document.querySelectorAll('[data-eye]').forEach(b=>b.onclick=()=>{const i=$(b.dataset.eye),h=i.type==='password';i.type=h?'text':'password';b.textContent=h?'Ocultar':'Mostrar'});
+$('c-login').onclick=()=>{['l-emp','l-cnpj','l-sen'].forEach(i=>$(i).value='');say('m-login','',true)};
+document.addEventListener('keydown',e=>{if(e.key!=='Enter'||e.target.tagName==='TEXTAREA')return;if(!$('login').classList.contains('hidden'))$('b-login').click();else if(!$('register').classList.contains('hidden'))$('b-reg').click()});
+
+$('b-reg').onclick=async()=>{
+ const emp=$('r-emp').value.trim(),cnpj=only($('r-cnpj').value),sen=$('r-sen').value;
+ if(!emp)return say('m-reg','Informe o nome da empresa.',0,'r-emp');
+ if(!validCnpj(cnpj))return say('m-reg','CNPJ inválido. Confira os 14 dígitos.',0,'r-cnpj');
+ if(sen.length<6)return say('m-reg','A senha precisa ter pelo menos 6 caracteres.',0,'r-sen');
+ const users=store.get('ts_users',{});
+ if(users[cnpj])return say('m-reg','Este CNPJ já está cadastrado. Volte e entre.',0,'r-cnpj');
+ users[cnpj]={emp,h:await hash(sen)};store.set('ts_users',users);
+ ['r-emp','r-cnpj','r-sen'].forEach(i=>$(i).value='');
+ show('login');say('m-login','Cadastro feito. Entre com seus dados.',true);
+};
+$('b-login').onclick=async()=>{
+ const emp=$('l-emp').value.trim(),cnpj=only($('l-cnpj').value),sen=$('l-sen').value;
+ const u=store.get('ts_users',{})[cnpj];
+ if(!u||u.h!==await hash(sen)||(emp&&emp.toLowerCase()!==u.emp.toLowerCase()))return say('m-login','Empresa, CNPJ ou senha incorretos.',0,'l-cnpj');
+ session=cnpj;$('who').textContent=u.emp;$('ini').textContent=u.emp[0].toUpperCase();$('l-sen').value='';
+ renderList();tab('new');show('help');
+};
+$('b-out').onclick=()=>{session=null;show('login')};
+function tab(w){const n=w==='new';$('p-new').classList.toggle('hidden',!n);$('list').classList.toggle('hidden',n);$('t-new').setAttribute('aria-selected',n);$('t-list').setAttribute('aria-selected',!n)}
+$('t-new').onclick=()=>tab('new');$('t-list').onclick=()=>tab('list');
+$('b-hclear').onclick=()=>{$('h-prob').value='';$('h-tel').value='';$('cnt').textContent=0;say('m-help','',true)};
+$('b-send').onclick=()=>{
+ const p=$('h-prob').value.trim(),t=only($('h-tel').value);
+ if(p.length<10)return say('m-help','Descreva o problema com mais detalhes.',0,'h-prob');
+ if(t.length<10)return say('m-help','Informe um telefone com DDD.',0,'h-tel');
+ const all=store.get('ts_tickets',[]);
+ all.unshift({id:Date.now(),cnpj:session,p,cat,urg,tel:$('h-tel').value,d:new Date().toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})});
+ store.set('ts_tickets',all);$('b-hclear').click();renderList();
+ toast('Pedido enviado! Um técnico vai ligar para o telefone informado.');tab('list');
+};
+function renderList(){
+ const mine=store.get('ts_tickets',[]).filter(t=>t.cnpj===session),ul=$('list');ul.innerHTML='';$('n').textContent=mine.length?'('+mine.length+')':'';
+ if(!mine.length){const d=document.createElement('li');d.className='empty';d.textContent='Nenhum chamado ainda. Use a aba AjudaAqui para pedir ajuda.';ul.appendChild(d);return}
+ mine.forEach(t=>{const li=document.createElement('li');li.className='tk '+t.urg;
+  const h=document.createElement('h3'),a=document.createElement('span'),b=document.createElement('span');a.textContent=t.cat;b.textContent=t.urg;h.append(a,b);
+  const p=document.createElement('p');p.textContent=t.p;
+  const s=document.createElement('small'),i=document.createElement('span'),x=document.createElement('button');i.textContent=t.d+' · '+t.tel;x.className='x';x.textContent='Cancelar chamado';
+  x.onclick=()=>{store.set('ts_tickets',store.get('ts_tickets',[]).filter(k=>k.id!==t.id));renderList();toast('Chamado cancelado.')};
+  s.append(i,x);li.append(h,p,s);ul.appendChild(li)});
+}
+</script>
+</body>
+</html>
